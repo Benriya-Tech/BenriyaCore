@@ -1,0 +1,259 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Benriya.Modules.Inventory</name>
+    </assembly>
+    <members>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsCategoryController.Index(System.Int32)">
+            <summary>
+            Retrieve data by ID
+            </summary>
+            <param name="id">The ID of the desired Goods_Category</param>
+            <returns>A status object and Data</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsCategoryController.Create(Benriya.Modules.Inventory.Share.Models.Products.Goods_Category)">
+            <summary>
+            Create new Goods_Category
+            </summary>
+            <param name="idata">Goods_Category object class</param>
+            <returns>A status object and Data</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsCategoryController.Update(System.Int32,Benriya.Modules.Inventory.Share.Models.Products.Goods_Category)">
+            <summary>
+            Edit the Goods_Category
+            </summary>
+            <param name="id">The ID of Goods_Category</param>
+            <param name="idata">Goods_Category object class</param>
+            <returns>A status object and Data</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsCategoryController.Remove(System.Int32)">
+            <summary>
+            Remove the Goods_Category
+            </summary>
+            <param name="id">Goods_Category id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsCategoryController.List(System.Int32,System.Int32,System.String)">
+            <summary>
+            Retrieve list of data and pagination
+            </summary>
+            <param name="page">Get data of page number</param>
+            <param name="pageSize">List of data per request</param>
+            <param name="txt">Search data by text</param>
+            <returns>A status object and Data</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsCategoryController.Delete(System.Int32)">
+            <summary>
+            Completed delete the Goods_Category
+            </summary>
+            <param name="id">Goods_Category id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsCategoryController.Dropdown(System.String,System.Int32)">
+            <summary>
+            Remove the Goods_Category
+            </summary>
+            <param name="q">Text search</param>
+            <param name="limit">List of data per request</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsCategoryController.Items(System.String,System.Int32)">
+            <summary>
+            Remove the Goods_Category
+            </summary>
+            <param name="q">Text search</param>
+            <param name="limit">List of data per request</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsController.Index(System.Guid)">
+            <summary>
+            Retrieve data by ID
+            </summary>
+            <param name="id">The ID of the desired Goods_Unit</param>
+            <returns>A status object and Data</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsController.Create(Benriya.Modules.Inventory.Share.Models.Products.Goods)">
+            <summary>
+            Create new Goods
+            </summary>
+            <param name="idata">Goods_Unit object class</param>
+            <returns>A status object and Data</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsController.Update(System.Guid,Benriya.Modules.Inventory.Share.Models.Products.Goods)">
+            <summary>
+            Edit the Goods
+            </summary>
+            <param name="id">The ID of Goods_Unit</param>
+            <param name="idata">Goods_Unit object class</param>
+            <returns>A status object and Data</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsController.Remove(System.Guid)">
+            <summary>
+            Remove the Goods_Unit
+            </summary>
+            <param name="id">Goods_Unit id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsController.List(System.Int32,System.Int32,System.String)">
+            <summary>
+            Retrieve list of data and pagination
+            </summary>
+            <param name="page">Get data of page number</param>
+            <param name="pageSize">List of data per request</param>
+            <param name="txt">Search data by text</param>
+            <returns>A status object and Data</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsController.Delete(System.Guid)">
+            <summary>
+            Completed delete the Goods_Unit
+            </summary>
+            <param name="id">Goods_Unit id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsController.Dropdown(System.String,System.Int32)">
+            <summary>
+            Remove the Goods_Unit
+            </summary>
+            <param name="q">Text search</param>
+            <param name="limit">List of data per request</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsController.Items(System.String,System.Int32)">
+            <summary>
+            Remove the Goods_Unit
+            </summary>
+            <param name="q">Text search</param>
+            <param name="limit">List of data per request</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsUnitController.Index(System.Int32)">
+            <summary>
+            Retrieve data by ID
+            </summary>
+            <param name="id">The ID of the desired Goods_Unit</param>
+            <returns>A status object and Data</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsUnitController.Create(Benriya.Modules.Inventory.Share.Models.Products.Goods_Unit)">
+            <summary>
+            Create new Goods_Unit
+            </summary>
+            <param name="idata">Goods_Unit object class</param>
+            <returns>A status object and Data</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsUnitController.Update(System.Int32,Benriya.Modules.Inventory.Share.Models.Products.Goods_Unit)">
+            <summary>
+            Edit the Goods_Unit
+            </summary>
+            <param name="id">The ID of Goods_Unit</param>
+            <param name="idata">Goods_Unit object class</param>
+            <returns>A status object and Data</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsUnitController.Remove(System.Int32)">
+            <summary>
+            Remove the Goods_Unit
+            </summary>
+            <param name="id">Goods_Unit id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsUnitController.List(System.Int32,System.Int32,System.String)">
+            <summary>
+            Retrieve list of data and pagination
+            </summary>
+            <param name="page">Get data of page number</param>
+            <param name="pageSize">List of data per request</param>
+            <param name="txt">Search data by text</param>
+            <returns>A status object and Data</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsUnitController.Delete(System.Int32)">
+            <summary>
+            Completed delete the Goods_Unit
+            </summary>
+            <param name="id">Goods_Unit id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsUnitController.Dropdown(System.String,System.Int32)">
+            <summary>
+            Remove the Goods_Unit
+            </summary>
+            <param name="q">Text search</param>
+            <param name="limit">List of data per request</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.GoodsUnitController.Items(System.String,System.Int32)">
+            <summary>
+            Remove the Goods_Unit
+            </summary>
+            <param name="q">Text search</param>
+            <param name="limit">List of data per request</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.WarehouseController.Index(System.Int32)">
+            <summary>
+            Retrieve data by ID
+            </summary>
+            <param name="id">The ID of the desired Warehouse</param>
+            <returns>A status object and Data</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.WarehouseController.Create(Benriya.Modules.Inventory.Share.Models.Warehouses.Warehouse)">
+            <summary>
+            Create new Warehouse
+            </summary>
+            <param name="idata">Warehouse object class</param>
+            <returns>A status object and Data</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.WarehouseController.Update(System.Int32,Benriya.Modules.Inventory.Share.Models.Warehouses.Warehouse)">
+            <summary>
+            Edit the Warehouse
+            </summary>
+            <param name="id">The ID of Warehouse</param>
+            <param name="idata">Warehouse object class</param>
+            <returns>A status object and Data</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.WarehouseController.Remove(System.Int32)">
+            <summary>
+            Remove the Warehouse
+            </summary>
+            <param name="id">Warehouse id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.WarehouseController.List(System.Int32,System.Int32,System.String)">
+            <summary>
+            Retrieve list of data and pagination
+            </summary>
+            <param name="page">Get data of page number</param>
+            <param name="pageSize">List of data per request</param>
+            <param name="txt">Search data by text</param>
+            <returns>A status object and Data</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.WarehouseController.Delete(System.Int32)">
+            <summary>
+            Completed delete the Warehouse
+            </summary>
+            <param name="id">Warehouse id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.WarehouseController.Dropdown(System.String,System.Int32)">
+            <summary>
+            Remove the Warehouse
+            </summary>
+            <param name="q">Text search</param>
+            <param name="limit">List of data per request</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.WarehouseController.Items(System.String,System.Int32)">
+            <summary>
+            Remove the Warehouse
+            </summary>
+            <param name="q">Text search</param>
+            <param name="limit">List of data per request</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Inventory.Controllers.WarehouseController.CheckArea(Benriya.Modules.Inventory.Share.Models.Warehouses.Warehouse_Area)">
+            <summary>
+            Check area data
+            </summary>
+            <param name="idata">Warehouse area data</param>
+            <returns>A status object</returns>
+        </member>
+    </members>
+</doc>

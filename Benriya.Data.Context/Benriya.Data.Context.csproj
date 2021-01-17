@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ExtCore\src\ExtCore.Data.EntityFramework.PostgreSql\ExtCore.Data.EntityFramework.PostgreSql.csproj" />
+    <ProjectReference Include="..\Benriya.Core\Benriya.Core.csproj" />
+    <ProjectReference Include="..\Modules\CMS\Benriya.Modules.CMS.Entities\Benriya.Modules.CMS.Entities.csproj" />
+    <ProjectReference Include="..\Modules\eCommerce\Benriya.Modules.eCommerce.Entities\Benriya.Modules.eCommerce.Entities.csproj" />
+    <ProjectReference Include="..\Modules\Inventory\Benriya.Modules.Inventory.Entities\Benriya.Modules.Inventory.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

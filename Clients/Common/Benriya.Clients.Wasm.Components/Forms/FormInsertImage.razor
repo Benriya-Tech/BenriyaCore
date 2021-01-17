@@ -1,0 +1,64 @@
+﻿@using Benriya.Utils
+@inherits Benriya.Clients.Wasm.Components.Forms.FormInsertImageBase
+
+@if (isLoading)
+{
+    <LoadingContent />
+}
+<div class="modal fade show" tabindex="-1" role="dialog" aria-labelledby="FormInsertImageTitle" id="FormInsertImage" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="FormInsertImageTitle">Insert image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fa fa-times"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs" id="insert__image-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="upload__image-tab" data-toggle="tab" href="#upload__image" role="tab" aria-controls="upload__image" aria-selected="true">Upload</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="link__image-tab" data-toggle="tab" href="#link__image" role="tab" aria-controls="link__image" aria-selected="false">From URL</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="insert__image-content">
+                    <div class="tab-pane fade show active" id="upload__image" role="tabpanel" aria-labelledby="upload__image-tab">
+                        <div class="mt-2">File upload:</div>
+                        <div class="custom-file mb-3">
+                            <input type="file" class="custom-file-input" @ref="inputFile" @onchange="async () => await ReadFileAsync()" accept="image/x-png,image/gif,image/jpeg"/>
+                            <label class="custom-file-label">Choose file...</label>
+                        </div>
+                        @if (fileInfo != null)
+                        {
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><b>File name:</b> @fileInfo.Name</li>
+                                <li class="list-group-item"><b>Size:</b> @Utility.SizeSuffix(fileInfo.Size) </li>
+                                <li class="list-group-item"><b>Type:</b> @fileInfo.Type</li>
+                            </ul>
+                        }
+                    </div>
+                    <div class="tab-pane fade" id="link__image" role="tabpanel" aria-labelledby="link__image-tab">
+                        <div class="form-group mt-2">
+                            <label for="url_image">URL:</label>
+                            <input type="email" class="form-control" id="url_image" aria-describedby="url_image-help" @bind="image_url" placeholder="..."/>
+                            <small id="url_image-help" class="form-text text-muted">Example: <span class="text-muted">//www.example.com/myimage.jpg</span></small>
+                        </div>
+
+                    </div>
+                </div>
+                @if(Message != null)
+                {
+                    <div class="alert alert-danger" role="alert">
+                      Error: @Message
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                <button type="submit" class="btn btn-primary" @onclick="async () => await InsertImageClick()"><i class="fa fa-check"></i> Insert image</button>
+            </div>
+        </div>
+    </div>
+</div>

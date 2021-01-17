@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Benriya.Modules.FileStore</name>
+    </assembly>
+    <members>
+        <member name="M:Benriya.Modules.FileStore.Controllers.FileTypeController.Index(System.Int32)">
+            <summary>
+            Retrieve data by ID
+            </summary>
+            <param name="id">The ID of the desired FileStore_Type</param>
+            <returns>A status object and Data</returns>
+        </member>
+        <member name="M:Benriya.Modules.FileStore.Controllers.FileTypeController.Create(Benriya.Share.Models.FileStore.FileStore_FileType)">
+            <summary>
+            Create new FileStore_Type
+            </summary>
+            <param name="idata">FileStore_Type object class</param>
+            <returns>A status object and Data</returns>
+        </member>
+        <member name="M:Benriya.Modules.FileStore.Controllers.FileTypeController.Update(System.Int32,Benriya.Share.Models.FileStore.FileStore_FileType)">
+            <summary>
+            Edit the FileStore_Type
+            </summary>
+            <param name="id">The ID of FileStore_Type</param>
+            <param name="idata">FileStore_Type object class</param>
+            <returns>A status object and Data</returns>
+        </member>
+        <member name="M:Benriya.Modules.FileStore.Controllers.FileTypeController.Remove(System.Int32)">
+            <summary>
+            Remove the FileStore_Type
+            </summary>
+            <param name="id">FileStore_Type id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.FileStore.Controllers.FileTypeController.List(System.Int32,System.Int32,System.String)">
+            <summary>
+            Retrieve list of data and pagination
+            </summary>
+            <param name="page">Get data of page number</param>
+            <param name="pageSize">List of data per request</param>
+            <param name="txt">Search data by text</param>
+            <returns>A status object and Data</returns>
+        </member>
+        <member name="M:Benriya.Modules.FileStore.Controllers.FileTypeController.Delete(System.Int32)">
+            <summary>
+            Completed delete the FileStore_Type
+            </summary>
+            <param name="id">FileStore_Type id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.FileStore.Controllers.FileTypeController.Dropdown(System.String,System.Int32)">
+            <summary>
+            Remove the FileStore_Type
+            </summary>
+            <param name="q">Text search</param>
+            <param name="limit">List of data per request</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.FileStore.Controllers.FileTypeController.Items(System.String,System.Int32)">
+            <summary>
+            Remove the FileStore_Type
+            </summary>
+            <param name="q">Text search</param>
+            <param name="limit">List of data per request</param>
+            <returns>A status object</returns>
+        </member>
+    </members>
+</doc>

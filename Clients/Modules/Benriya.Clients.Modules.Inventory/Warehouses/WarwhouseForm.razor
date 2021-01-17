@@ -1,0 +1,164 @@
+﻿@page "/admin/inventory/whform/{id}"
+@page "/admin/inventory/whform"
+@using Benriya.Clients.Wasm.Components.Grid
+@using Benriya.Clients.Wasm.Components.Modals
+@using Benriya.Clients.Wasm.Components.Classes
+@using Benriya.Share.Models.FileStore
+@using Benriya.Modules.Inventory.Share.Models.Warehouses
+@using Benriya.Clients.Wasm.Components.Inputs
+@using Benriya.Utils
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@inherits Benriya.Clients.Modules.Inventory.Warehouses.WarwhouseFormBase
+
+<div class="card">
+    <div class="card-body">
+        <EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">            
+            <DataAnnotationsValidator />       
+            <Benriya.Clients.Wasm.Components.Forms.FormServValidator @ref="formValidator"/>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8">
+
+                        <div class="form-group">
+                            <label>Name:</label>
+                            <InputText @bind-Value="model.name" class="form-control form-control-sm" type="text" />
+                            <ValidationMessage For="@(() => model.name)" />
+                        </div>
+
+                        <div class="form-check">
+                            <InputCheckbox @bind-Value="@model.is_main" class="form-check-input" id="warehouse_is_main" />
+                            <label class="form-check-label" for="warehouse_is_main">Is Main warehouse</label>
+                            <ValidationMessage For="@(() => model.is_main)" />
+                        </div>
+                        <div class="form-check">
+                            <InputCheckbox @bind-Value="@model.is_active" class="form-check-input" id="warehouse_is_active" />
+                            <label class="form-check-label" for="warehouse_is_active">Is Active</label>
+                            <ValidationMessage For="@(() => model.is_active)" />
+                        </div>
+                        @if (!model.is_active)
+                        {
+                            <div class="form-group">
+                                <label class="text-danger">หมายเหตุ:</label>
+                                <InputTextArea @bind-Value="@model.remark" class="form-control form-control-sm" />
+                                <ValidationMessage For="@(() => model.remark)" />
+                            </div>
+                        }
+                        <div class="form-group">
+                            <label class="mt-1">Warehouse description:</label>
+                            <InputTextArea @bind-Value="@model.description" class="form-control form-control-sm" />
+                            <ValidationMessage For="@(() => model.description)" />
+                        </div>
+
+                        <!-- Grid -->
+                        <div class="mt-1"></div>
+                        <div class="bg-app mt-1 pt-2 mb-n3">
+                            <div class="btn-group ml-3" role="group" aria-label="Button group with nested dropdown" style="z-index:1">
+                                <button type="button" class="btn btn-sm btn-success" @onclick="OpenForm"><i class="fa fa-plus"></i> Add new</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Reload</button>
+                            </div>
+                        </div>
+
+
+
+
+                        @if (areaList == null || areaList.Count() == 0)
+                        {
+                            if (model.Areas != null && !IsGridViewFiltered)
+                            {
+                                areaList = model.Areas.ToList();
+                                totalItem = model.Areas.Count();
+                            }
+                            else
+                            {
+                                areaList = new List<Warehouse_Area>();
+                            }
+                        }
+
+                        <GridClientView Items="areaList" ReloadList="IsGridViewFiltered" Total="totalItem">
+                            <GridColumns>
+                                <GridClientColumn ColumnTitle="Name"
+                                                  OnSearchTextChanged="@(e => OnSearchTextChanged(e, "name"))"></GridClientColumn>
+                                <GridClientColumn ColumnTitle="description"
+                                                  OnSearchTextChanged="@(e => OnSearchTextChanged(e, "description"))"></GridClientColumn>
+                                <GridClientColumn ColumnTitle="Updated" SearchText="false"></GridClientColumn>
+                                <AuthorizeView>
+                                    <Authorized Context="auth">
+                                        <GridColumn ColumnTitle="Actions"></GridColumn>
+                                    </Authorized>
+                                </AuthorizeView>
+                            </GridColumns>
+                            <GridRow Context="data">
+                                <td>@data.name</td>
+                                <td>@data.description</td>
+                                <td>@data.updated</td>
+                                <AuthorizeView>
+                                    <Authorized Context="auth">
+                                        <th>
+                                            <button type="button" class="btn btn-sm btn-outline-warning" @onclick="@(e => ShowForm(data))"><i class="fa fa-edit"></i></button>
+                                            <button type="button" class="btn btn-sm btn-outline-danger" @onclick="@(e => DelAreaConfirm(data))"><i class="fa fa-times"></i></button>
+                                        </th>
+                                    </Authorized>
+                                </AuthorizeView>
+
+                            </GridRow>
+                        </GridClientView>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="mt-3">
+                            <InputFileUpload TItem="FileStore_Images" InsertImage="OnInsertImage" Module="@Config_FileStore_Modules.Warehouse_Image_Module" Width="220"/>
+                            <div class="row mt-1">
+                                @if (model.Images != null)
+                                {
+                                    foreach (var file in model.Images)
+                                    {
+                                        <div class="col-6 mt-3">
+                                            <button type="button" class="btn btn-sm btn-outline-danger mt-n2" style="position:absolute;float:right; right:0;" @onclick="@(e => DelImageConfirm(file))"><i class="fa fa-times"></i></button>
+                                            <img src="@($"{CLIENT_CONFIG.API_URL}{file.url}/{file.check_sum}")" class="img-zoom" style="width:100%" title="@file.title" />
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="submit" class="btn btn-lg btn-primary">Save</button>
+                @if (has_id)
+                {
+                    <button type="button" class="btn btn-lg btn-secondary" @onclick="@OnCancel">Close</button>
+                }
+                else
+                {
+                    <button type="button" class="btn btn-lg btn-secondary" @onclick="@ResetModel">Clear</button>
+                }
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+
+<ModalContent @ref="modalForm">
+    <Title>This is a <em>Title!</em> - @ModelAreaData.id</Title>
+    <Content>
+        <WarwhouseAreaForm ModelData="ModelAreaData" OnCancel="OnCancelModal" OnReset="OnResetModelModal" OnSubmit="HandleValidSubmitModal"/>
+    </Content>
+</ModalContent>
+<ModalConfirm @ref="modalDelArea" OnConfirm="DeleteArea">
+    <Title>ยืนยันการลบข้อมูล</Title>
+    <Body>
+        คุณค้องการลบข้อมูล ใช่หรือไม่?<br/>
+        @ModelAreaData.name<br/>
+        @ModelAreaData.description
+    </Body>
+</ModalConfirm>
+<ModalConfirm @ref="modalDelImage" OnConfirm="DeleteImage">
+    <Title>ยืนยันการลบข้อมูล</Title>
+    <Body>
+        คุณค้องการลบข้อมูล ใช่หรือไม่?<br/>
+        @ModelAreaData.name<br/>
+        @ModelAreaData.description
+    </Body>
+</ModalConfirm>

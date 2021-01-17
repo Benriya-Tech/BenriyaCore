@@ -1,0 +1,144 @@
+﻿@*using ExtCore.Infrastructure;*@
+@* Copyright © 2017 Dmitry Sikorsky. All rights reserved. *@
+@* Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information. *@
+@using Benriya.Modules.Default.Classes;
+@model IndexViewModel
+@{
+    this.ViewBag.Title = "Server: Extensions list";
+}
+<div class="container h-100">
+    <div class="row align-items-center h-100">
+        <div class="col-8 mx-auto">
+            <div class="jumbotron bg-light">
+                <div class="row mb-2">
+                    <div class="col text-right">
+                        <div>Benriya Core: @Model.AppVersion</div>
+                        <div>Rentime version: @Model.Runtime</div>
+                        <div>.Net verionn: @Model.AspDotnetVersion</div>
+                        <div>Platform: @Model.OsPlatform</div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col">
+                        <div class="card shadow-sm mb-1" style="width: 100%;">
+                            <div class="card-img-top text-center">
+                                <svg style="width:50%;height:50%;" class="text-primary" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M5,3H7V5H5V10A2,2 0 0,1 3,12A2,2 0 0,1 5,14V19H7V21H5C3.93,20.73 3,20.1 3,19V15A2,2 0 0,0 1,13H0V11H1A2,2 0 0,0 3,9V5A2,2 0 0,1 5,3M19,3A2,2 0 0,1 21,5V9A2,2 0 0,0 23,11H24V13H23A2,2 0 0,0 21,15V19A2,2 0 0,1 19,21H17V19H19V14A2,2 0 0,1 21,12A2,2 0 0,1 19,10V5H17V3H19M12,15A1,1 0 0,1 13,16A1,1 0 0,1 12,17A1,1 0 0,1 11,16A1,1 0 0,1 12,15M8,15A1,1 0 0,1 9,16A1,1 0 0,1 8,17A1,1 0 0,1 7,16A1,1 0 0,1 8,15M16,15A1,1 0 0,1 17,16A1,1 0 0,1 16,17A1,1 0 0,1 15,16A1,1 0 0,1 16,15Z" />
+                                </svg>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title hide" style="display:none">API docs</h5>
+                                <a href="/api/index.html" class="btn btn-success btn-sm text-nowrap">
+                                    <svg style="width:22px;height:22px" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" />
+                                    </svg>
+                                    API
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card shadow-sm mb-1" style="width: 100%;">
+                            <div class="card-img-top text-center">
+                                <svg style="width:50%;height:50%;" class="text-info" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M16.36,14C16.44,13.34 16.5,12.68 16.5,12C16.5,11.32 16.44,10.66 16.36,10H19.74C19.9,10.64 20,11.31 20,12C20,12.69 19.9,13.36 19.74,14M14.59,19.56C15.19,18.45 15.65,17.25 15.97,16H18.92C17.96,17.65 16.43,18.93 14.59,19.56M14.34,14H9.66C9.56,13.34 9.5,12.68 9.5,12C9.5,11.32 9.56,10.65 9.66,10H14.34C14.43,10.65 14.5,11.32 14.5,12C14.5,12.68 14.43,13.34 14.34,14M12,19.96C11.17,18.76 10.5,17.43 10.09,16H13.91C13.5,17.43 12.83,18.76 12,19.96M8,8H5.08C6.03,6.34 7.57,5.06 9.4,4.44C8.8,5.55 8.35,6.75 8,8M5.08,16H8C8.35,17.25 8.8,18.45 9.4,19.56C7.57,18.93 6.03,17.65 5.08,16M4.26,14C4.1,13.36 4,12.69 4,12C4,11.31 4.1,10.64 4.26,10H7.64C7.56,10.66 7.5,11.32 7.5,12C7.5,12.68 7.56,13.34 7.64,14M12,4.03C12.83,5.23 13.5,6.57 13.91,8H10.09C10.5,6.57 11.17,5.23 12,4.03M18.92,8H15.97C15.65,6.75 15.19,5.55 14.59,4.44C16.43,5.07 17.96,6.34 18.92,8M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+                                </svg>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title hide" style="display:none">Client apps</h5>
+                                <a href="https://localhost:44306/" class="btn btn-success btn-sm text-nowrap" target="_blank">
+                                    <svg style="width:22px;height:22px" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" />
+                                    </svg>
+                                    Client
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card shadow-sm mb-1" style="width: 100%;">
+                            <div class="card-img-top text-center">
+                                <svg style="width:50%;height:50%;" class="text-secondary" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z" />
+                                </svg>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title hide" style="display:none">..</h5>
+                                <a href="#" class="btn btn-secondary btn-sm disabled text-nowrap" target="_blank">
+                                    <svg style="width:22px;height:22px" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" />
+                                    </svg>
+                                    ...
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card shadow-sm mb-1" style="width: 100%;">
+                            <div class="card-img-top text-center">
+                                <svg style="width:50%;height:50%;" class="text-secondary" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z" />
+                                </svg>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title hide" style="display:none">..</h5>
+                                <a href="#" class="btn btn-secondary btn-sm disabled text-nowrap" target="_blank">
+                                    <svg style="width:22px;height:22px" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" />
+                                    </svg>
+                                    ...
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr />
+                <div style="font-size:16px;">
+                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M21,5L9,17L3.5,11.5L4.91,10.09L9,14.17L19.59,3.59L21,5M3,21V19H21V21H3Z" />
+                    </svg>
+                    <b>Installed extensions:</b>
+                </div>
+                <div class="list-group">
+                    @foreach (var item in this.Model.exts)
+                    {
+                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">@item.Name</h5>
+                                <small>@item.Version</small>
+                            </div>
+                            <p class="mb-1">@item.Description</p>
+                            @if (item.Url != null && item.Url != "")
+                            {
+                                if (item.Url.IndexOfAny(new[] { '\\','/','?','=','&' }) == -1)
+                                {
+                                    <small>@item.Url</small>
+                                }
+                                else {
+                                    <small><a href="@item.Url" target="_blank">@item.Url</a></small>  
+                                }
+                            }
+                        </div>
+                    }
+                </div>
+
+                <div class="row">
+                    <div class="col mt-3">
+                        <ul>
+                        @foreach (var assm in Model.Assemblies)
+                        {
+                            <li>@assm.GetName().FullName</li>
+                        }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

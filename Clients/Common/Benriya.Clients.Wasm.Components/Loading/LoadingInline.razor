@@ -1,0 +1,12 @@
+﻿<div class="@CssClass" style="@CssStyle"><span class="float-left"><Loading2ball/></span> <div class="text-info" style="padding-top:4px;">@Message</div></div>
+
+@code {
+    [Parameter]
+    public string CssStyle { get; set; }
+
+    [Parameter]
+    public string CssClass { get; set; } = "text-left";
+
+    [Parameter]
+    public string Message { get; set; } = "Looking for data...";
+}

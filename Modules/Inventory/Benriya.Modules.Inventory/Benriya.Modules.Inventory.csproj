@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Product>c0b29f8b26597ab41d738358f212241d</Product>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\..\Extensions\</OutputPath>
+    <DocumentationFile>..\..\..\docs\Benriya.Modules.Inventory.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Benriya.Modules.Inventory.Entities\Benriya.Modules.Inventory.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

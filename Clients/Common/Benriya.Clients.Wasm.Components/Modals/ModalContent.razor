@@ -1,0 +1,18 @@
+﻿@inherits Benriya.Clients.Wasm.Components.Modals.ModalContentBase
+<div class="modal fade @modalClass" tabindex="-1" role="dialog" style="display:@modalDisplay; overflow-y: auto;" aria-hidden="true">
+    <div class="modal-dialog modal-@Size @Position" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="Close">
+                    <span aria-hidden="true"><i class="fa fa-times"></i></span>
+                </button>
+            </div>
+            @Content
+        </div>
+    </div>
+</div>
+@if (showBackdrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}

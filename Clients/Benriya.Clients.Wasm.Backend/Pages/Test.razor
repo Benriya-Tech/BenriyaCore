@@ -1,0 +1,48 @@
+﻿@page "/test"
+@inject HttpClient Http
+<h3>Test</h3>
+
+
+<div>
+    @foreach (var img in fileList)
+    {
+        <div>x
+            <img src="/images/login/@img">
+        </div>
+    }    
+</div>
+
+@code{
+    string path = $"{System.IO.Directory.GetCurrentDirectory()}{@"\wwwroot\images\login"}";
+    List<string> fileList = new List<string>();
+
+    public void LoadImages()
+    {
+        var files = System.IO.Directory.GetFiles(path);
+        foreach (var file in files)
+        {
+            fileList.Add(System.IO.Path.GetFileName(file));
+        }
+    }
+
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    //LoadImages();
+    //}
+}
+
+@*@((MarkupString)customHTML)
+
+
+@code{
+    protected override async Task OnInitializedAsync()
+    {
+        ///MarkupString customHTML = "<h1></h2>";
+        var resp = await Http.GetAsync("https://localhost:5001/report/designer");
+        customHTML  = resp.Content.ReadAsStringAsync().Result;
+    }
+}
+
+@functions {
+string customHTML = "<p>This is a <strong>custom HTML</strong> code</p>";
+}*@

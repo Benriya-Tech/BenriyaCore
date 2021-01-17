@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Benriya.Modules.UserManagement</name>
+    </assembly>
+    <members>
+        <member name="M:Benriya.Modules.UserManagement.Controllers.GuestController.Register(Benriya.Share.Models.SystemUsers.Users)">
+            <summary>
+            Register new users
+            </summary>
+            <returns>User object</returns>
+        </member>
+        <member name="M:Benriya.Modules.UserManagement.Controllers.RolesController.Index(System.Int32)">
+            <summary>
+            Get user role
+            </summary>
+            <returns>Role object</returns>
+        </member>
+        <member name="M:Benriya.Modules.UserManagement.Controllers.RolesController.Remove(System.Int32)">
+            <summary>
+            Remove the category
+            </summary>
+            <param name="id">Category id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.UserManagement.Controllers.RolesController.Delete(System.Int32)">
+            <summary>
+            Completed delete the category
+            </summary>
+            <param name="id">Category id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.UserManagement.Controllers.UsersController.Index(System.Guid)">
+            <summary>
+            Get user role
+            </summary>
+            <returns>Role object</returns>
+        </member>
+        <member name="M:Benriya.Modules.UserManagement.Controllers.UsersController.ToEdit(System.Guid)">
+            <summary>
+            Get user role
+            </summary>
+            <returns>Role object</returns>
+        </member>
+        <member name="M:Benriya.Modules.UserManagement.Controllers.UsersController.Remove(System.Guid)">
+            <summary>
+            Remove the category
+            </summary>
+            <param name="id">Category id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.UserManagement.Controllers.UsersController.Delete(System.Guid)">
+            <summary>
+            Completed delete the category
+            </summary>
+            <param name="id">Category id</param>
+            <returns>A status object</returns>
+        </member>
+    </members>
+</doc>

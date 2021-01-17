@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mapster" Version="7.0.1" />
+    <PackageReference Include="MongoDB.Bson" Version="2.11.5" />
+    <PackageReference Include="Toolbelt.EntityFrameworkCore.IndexAttribute" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ExtCore\src\ExtCore.Data.Entities.Abstractions\ExtCore.Data.Entities.Abstractions.csproj" />
+    <ProjectReference Include="..\Benriya.Utils\Benriya.Utils.csproj" />
+  </ItemGroup>
+
+</Project>

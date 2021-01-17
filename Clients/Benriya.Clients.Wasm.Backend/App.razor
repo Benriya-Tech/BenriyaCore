@@ -1,0 +1,30 @@
+@inject IApiServiceProvider _ApiServiceProvider
+@inject ILoadingService _Loading
+
+<Router AppAssembly="@typeof(Program).Assembly" AdditionalAssemblies="@Program.ModulesRegistered" OnNavigateAsync="OnNavigate">
+    <Found Context="routeData">
+        <AuthorizeRouteView  RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+    </Found>
+    <NotFound>
+        <CascadingAuthenticationState>
+            <LayoutView Layout="@typeof(MainLayout)">
+                <p>Sorry, there's nothing at this address.</p>
+            </LayoutView>
+        </CascadingAuthenticationState>
+    </NotFound>
+</Router>
+
+@code{
+    protected override async Task OnInitializedAsync()
+    {
+        _Loading.Show();
+        //@inject Toolbelt.Blazor.I18nText.I18nText _lang
+        //await _lang.GetTextTableAsync<Benriya.Clients.Wasm.Components.I18nText.Manager>(this);
+        await _ApiServiceProvider.IniClientInfo();
+        _Loading.Hide();
+    }
+    protected void OnNavigate(NavigationContext navContext)
+    {
+        Console.WriteLine(navContext.Path);
+    }
+}

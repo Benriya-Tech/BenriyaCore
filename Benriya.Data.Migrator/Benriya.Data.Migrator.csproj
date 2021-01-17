@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <Product>c0b29f8b26597ab41d738358f212241d</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ExtCore\src\ExtCore.Mvc\ExtCore.Mvc.csproj" />
+    <ProjectReference Include="..\..\ExtCore\src\ExtCore.WebApplication\ExtCore.WebApplication.csproj" />
+    <ProjectReference Include="..\Benriya.Data.Context\Benriya.Data.Context.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.1">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,46 @@
+﻿@page "/admin/policyform/{id}"
+@page "/admin/policyform"
+@using Benriya.Clients.Wasm.Components.Forms
+@inherits Benriya.Clients.Wasm.Backend.Pages.CoreSystem.Policy.PolicyFormBase
+
+
+@if (isLoading)
+{
+    <LoadingContent />
+}
+<EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <FormServValidator @ref="formValidator" />
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group col-4">
+                <label>Test</label>
+                <InputText @bind-Value="model.name" class="form-control form-control-sm" type="text" />
+                <ValidationMessage For="@(() => model.name)" />
+            </div>
+            <div class="form-group col-4">
+                <label>Test</label>
+                <InputText @bind-Value="@model.code" class="form-control form-control-sm" type="text" />
+                <ValidationMessage For="@(() => model.code)" />
+            </div>
+            <div class="form-group col-4">
+                <label>Test</label>
+                <InputText @bind-Value="@model.description" class="form-control form-control-sm" type="text" />
+                <ValidationMessage For="@(() => model.description)" />
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer justify-content-center">
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        @if (has_id)
+        {
+            <button type="button" class="btn btn-secondary" @onclick="@OnCancel">Close</button>
+        }
+        else
+        {
+            <button type="button" class="btn btn-secondary" @onclick="@ResetModel">Clear</button>
+        }
+
+    </div>
+</EditForm>

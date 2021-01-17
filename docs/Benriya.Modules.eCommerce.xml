@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Benriya.Modules.eCommerce</name>
+    </assembly>
+    <members>
+        <member name="M:Benriya.Modules.eCommerce.Controllers.TestController.Index(System.Int32)">
+            <summary>
+            Retrieve Index
+            </summary>
+            <param name="id">The ID of the desired Employee</param>
+            <returns>A string status</returns>
+        </member>
+        <member name="M:Benriya.Modules.eCommerce.Controllers.TestController.GetByName(System.String,System.String)">
+            <summary>
+            Returns a group of Employees matching the given first and last names.
+            </summary>
+            <remarks>
+            Here is a sample remarks placeholder.
+            </remarks>
+            <param name="firstName">The first name to search for</param>
+            <param name="lastName">The last name to search for</param>
+            <returns>A string status</returns>
+        </member>
+    </members>
+</doc>

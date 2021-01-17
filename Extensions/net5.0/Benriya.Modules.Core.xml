@@ -1,0 +1,184 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Benriya.Modules.Core</name>
+    </assembly>
+    <members>
+        <member name="M:Benriya.Modules.Core.Controllers.AuthorizeController.Index(System.Int32)">
+            <summary>
+            Retrieve Index
+            </summary>
+            <param name="id">The ID of the desired Employee</param>
+            <returns>A string status</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.MenuController.Index(System.Int32)">
+            <summary>
+            Retrieve Index
+            </summary>
+            <param name="id">The ID of the desired Employee</param>
+            <returns>A string status</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.MenuController.Remove(System.Int32)">
+            <summary>
+            Remove the category
+            </summary>
+            <param name="id">Category id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.MenuController.Delete(System.Int32)">
+            <summary>
+            Completed delete the category
+            </summary>
+            <param name="id">Category id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.MenuController.ListAsync">
+            <summary>
+            List all of menu
+            </summary>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.PermissionController.Index(System.Int32)">
+            <summary>
+            Retrieve Index
+            </summary>
+            <param name="id">The ID of the desired Employee</param>
+            <returns>A string status</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.PermissionController.Remove(System.Int32)">
+            <summary>
+            Remove the category
+            </summary>
+            <param name="id">Category id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.PermissionController.Delete(System.Int32)">
+            <summary>
+            Completed delete the category
+            </summary>
+            <param name="id">Category id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.PermissionController.ListAsync">
+            <summary>
+            List all of menu
+            </summary>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.PolicyController.Index(System.Int32)">
+            <summary>
+            Retrieve Index
+            </summary>
+            <param name="id">The ID of the desired Employee</param>
+            <returns>A string status</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.PolicyController.Remove(System.Int32)">
+            <summary>
+            Remove the category
+            </summary>
+            <param name="id">Category id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.PolicyController.Delete(System.Int32)">
+            <summary>
+            Completed delete the category
+            </summary>
+            <param name="id">Category id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.PolicyController.ListAsync">
+            <summary>
+            List all of menu
+            </summary>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.TagGroupController.Index(System.Int32)">
+            <summary>
+            Retrieve Index
+            </summary>
+            <param name="id">The ID of the desired Employee</param>
+            <returns>A string status</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.TagGroupController.Remove(System.Int32)">
+            <summary>
+            Remove the category
+            </summary>
+            <param name="id">Category id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.TagGroupController.Delete(System.Int32)">
+            <summary>
+            Completed delete the category
+            </summary>
+            <param name="id">Category id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.TagGroupController.ListAsync">
+            <summary>
+            List all of menu
+            </summary>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.TagGroupController.Dropdown(System.String,System.Int32)">
+            <summary>
+            List of tag category
+            </summary>
+            <param name="q">Text search</param>
+            <param name="limit">List of data per request</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.TagsController.Index(System.Guid)">
+            <summary>
+            Retrieve Index
+            </summary>
+            <param name="id">The ID of the desired Employee</param>
+            <returns>A string status</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.TagsController.Remove(System.Guid)">
+            <summary>
+            Remove the category
+            </summary>
+            <param name="id">Category id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.TagsController.Delete(System.Guid)">
+            <summary>
+            Completed delete the category
+            </summary>
+            <param name="id">Category id</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.TagsController.ListAsync">
+            <summary>
+            List all of menu
+            </summary>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.TagsController.Dropdown(System.String,System.Int32)">
+            <summary>
+            List of tag category
+            </summary>
+            <param name="q">Text search</param>
+            <param name="limit">List of data per request</param>
+            <returns>A status object</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.TestController.Index(System.Int32)">
+            <summary>
+            Retrieve Index
+            </summary>
+            <param name="id">The ID of the desired Employee</param>
+            <returns>A string status</returns>
+        </member>
+        <member name="M:Benriya.Modules.Core.Controllers.TestController.GetByName(System.String,System.String)">
+            <summary>
+            Returns a group of Employees matching the given first and last names.
+            </summary>
+            <remarks>
+            Here is a sample remarks placeholder.
+            </remarks>
+            <param name="firstName">The first name to search for</param>
+            <param name="lastName">The last name to search for</param>
+            <returns>A string status</returns>
+        </member>
+    </members>
+</doc>

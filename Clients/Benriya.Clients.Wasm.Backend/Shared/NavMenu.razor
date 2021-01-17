@@ -1,0 +1,188 @@
+﻿@using Benriya.Share.Models.Menus
+@inherits Benriya.Clients.Wasm.Backend.Classes.Layout.NavMenu
+
+<div id="layoutSidenav_nav">
+    <div class="mt-2 sidebar-close-btn">
+        <span class="bg-info text-center button d-block d-lg-none" @onclick="OnToggleSidebar">
+            @if (isBodyToggleClass)
+            {
+                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            }
+            else
+            {
+                <i class="fa fa-times" aria-hidden="true"></i>               
+            }
+        </span>
+    </div>
+    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+        <div class="sb-sidenav-menu">
+            <div class="nav">
+                <div class="sb-sidenav-menu-heading">Core</div>
+                <a class="nav-link" href="index.html">
+                    <div class="sb-nav-link-icon"><i class="fa fa-tachometer-alt"></i></div>
+                    Dashboard
+                </a>
+                <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                    <div class="sb-nav-link-icon"><span class="fa fa-home" aria-hidden="true"></span></div>
+                    Home
+                </NavLink>
+                
+                @if (menuList == null || isLoading)
+                {
+                    if (isLoading)
+                    {
+
+                        <LoadingInline Message="Initialize menu..." CssClass="text-left p-2 pt-3 mt-2" CssStyle="border-top:1px #777 dotted;"/>
+
+                    }
+                    else
+                    {
+
+                        <div class="alert alert-danger m-1 mt-3" role="alert">
+                            <div class="alert-heading">Error:</div>
+                            <p><small>Cannot load menu, please try again...</small></p>
+                            <button class="btn btn-warning" onclick="window.location.reload()"><i class="fa fa-refresh" aria-hidden="true"></i> Reload</button>
+                        </div>
+
+                    }
+                }
+                else
+                {
+
+                    @if (menuList.Count() > 0)
+                    {
+                        @foreach (var menu in menuList)
+                        {
+                            if (menu.parent_menu_id < 1)
+                            {
+                                var subs = menuList.Where(x => x.parent_menu_id == menu.id);
+                                @if (subs != null && subs.Count() > 0)
+                                {
+                                    <a class="nav-link collapsed" id="@($"hnavmenu_{menu.id}")" href="#" data-toggle="collapse" data-target="@($"#navmenu_{menu.id}")" aria-expanded="false" aria-controls="@($"navmenu_{menu.id}")">
+                                        <div class="sb-nav-link-icon"><i class="@DefualtIcon(menu.icon)" aria-hidden="true"></i></div>
+                                        @menu.name
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                    </a>
+                                    <div class="collapse" id="@($"navmenu_{menu.id}")" aria-labelledby="@($"hnavmenu_{menu.id}")" data-parent="#sidenavAccordion">
+                                        <nav class="sb-sidenav-menu-nested nav" id="@($"sidenav_{menu.id}")">
+                                            @foreach (var sub_menu in subs)
+                                            {
+                                                var sub_last = menuList.Where(x => x.parent_menu_id == sub_menu.id);
+                                                
+                                                @if(sub_last != null && sub_last.Count() > 0)
+                                                {
+                                                    <a class="nav-link collapsed" id="@($"hsnavmenu_{sub_menu.id}")" href="#" data-toggle="collapse" data-target="@($"#snavmenu_{sub_menu.id}")" aria-expanded="false" aria-controls="@($"snavmenu_{sub_menu.id}")">
+                                                        <div class="sb-nav-link-icon"><i class="@DefualtIcon(sub_menu.icon,true)" aria-hidden="true"></i></div>
+                                                        @sub_menu.name
+                                                        <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                                    </a>
+                                                    <div class="collapse" id="@($"snavmenu_{sub_menu.id}")" aria-labelledby="@($"hsnavmenu_{sub_menu.id}")" data-parent="@($"#sidenav_{menu.id}")">
+                                                        <nav class="sb-sidenav-menu-nested nav">                                                    
+                                                            @foreach (var l_sub in sub_last)
+                                                            {
+                                                                <NavLink class="nav-link" href="@l_sub.url" Match="NavLinkMatch.Prefix">
+                                                                    <div class="sb-nav-link-icon"><span class="@DefualtIcon(l_sub.icon,true)" aria-hidden="true"></span></div>
+                                                                    @l_sub.name
+                                                                </NavLink>
+                                                            }
+                                                        </nav>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <NavLink class="nav-link" href="@sub_menu.url" Match="NavLinkMatch.Prefix">
+                                                        <div class="sb-nav-link-icon"><span class="@DefualtIcon(sub_menu.icon,true)" aria-hidden="true"></span></div>
+                                                        @sub_menu.name
+                                                    </NavLink>
+                                                }
+                                            }
+                                        </nav>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <NavLink class="nav-link" href="@menu.url" Match="NavLinkMatch.Prefix">
+                                        <div class="sb-nav-link-icon"><span class="@DefualtIcon(menu.icon)" aria-hidden="true"></span></div>
+                                        @menu.name
+                                    </NavLink>
+                                }
+
+
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        <div class="alert alert-danger m-1 mt-3" role="alert">
+                            <div class="alert-heading">Warning:</div>
+                            <p><small>No menu found...</small></p>
+                            <button class="btn btn-warning" onclick="window.location.reload()"><i class="fa fa-refresh" aria-hidden="true"></i> Reload</button>
+                        </div>
+                    }
+                }
+                <NavLink class="nav-link" href="/admin/backendmenu" Match="NavLinkMatch.Prefix">
+                    <div class="sb-nav-link-icon"><span class="fa fa-list" aria-hidden="true"></span></div>
+                    Backend menus
+                </NavLink>
+
+                <div class="sb-sidenav-menu-heading">Interface</div>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                    <div class="sb-nav-link-icon"><i class="fa fa-columns"></i></div>
+                    Layouts
+                    <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="layout-static.html">Static Navigation</a>
+                        <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
+                    </nav>
+                </div>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                    <div class="sb-nav-link-icon"><i class="fa fa-book-open"></i></div>
+                    Pages
+                    <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                            Authentication
+                            <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="login.html">Login</a>
+                                <a class="nav-link" href="register.html">Register</a>
+                                <a class="nav-link" href="password.html">Forgot Password</a>
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                            Error
+                            <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="401.html">401 Page</a>
+                                <a class="nav-link" href="404.html">404 Page</a>
+                                <a class="nav-link" href="500.html">500 Page</a>
+                            </nav>
+                        </div>
+                    </nav>
+                </div>
+                <div class="sb-sidenav-menu-heading">Addons</div>
+                <a class="nav-link" href="charts.html">
+                    <div class="sb-nav-link-icon"><i class="fa fa-chart-area"></i></div>
+                    Charts
+                </a>
+                <a class="nav-link" href="tables.html">
+                    <div class="sb-nav-link-icon"><i class="fa fa-table"></i></div>
+                    Tables
+                </a>
+            </div>
+        </div>
+        <div class="sb-sidenav-footer">
+            <div class="small">Logged in as:</div>
+            Start Bootstrap
+        </div>
+    </nav>
+</div>

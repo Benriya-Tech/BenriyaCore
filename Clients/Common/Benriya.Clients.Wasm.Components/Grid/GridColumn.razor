@@ -1,0 +1,35 @@
+﻿@using System.Linq
+@using Benriya.Clients.Wasm.Components.Icons
+@inherits Benriya.Clients.Wasm.Components.Grid.GridColumnBase
+
+<th class="text-center" style="position:relative;vertical-align:text-top">
+    @ColumnTitle <span style="padding:2px"></span>
+    @if (!Param.isNOEOW())
+    {
+        <span class="grid-sorting @(SortBy == Param ? "text-light" : "")" @onclick="@(e => ClickedSort(SortOrder, Param))" title="@SortOrder.ToUpper()">
+            @if (SortOrder == "desc")
+            {
+                <IconSortUp/>
+            }
+            else
+            {
+                <IconSortDown/>
+            }
+        </span>
+    }
+    @* if collapse not working ---> add "grid-filter" instread "collapse"*@
+    <div class="col-12 row align-items-center form-group collapse multi-collapse">
+        @if (SearchText && !ColumnTitle.isNOEOW() && !Param.isNOEOW())
+        {
+            <div class="col-auto">
+              <label class="sr-only" for="@Param">search...</label>
+              <div class="input-group mb-1">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><IconFilter/></div>
+                </div>
+                <input type="@InputType" class="form-control form-control-sm" id="@Param" @bind="iniValue" @oninput="OnSearchTextChanged" placeholder="search..." title="Search...">
+              </div>
+            </div>
+        }        
+    </div>
+</th>

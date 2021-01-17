@@ -1,0 +1,64 @@
+﻿@page "/admin/filestore/types_form/{id}"
+@page "/admin/filestore/types_form"
+@using Benriya.Clients.Wasm.Components.Forms
+@inherits Benriya.Clients.Wasm.Backend.Pages.Filestore.FileStoreType_FormBase
+
+
+<EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <FormServValidator @ref="formValidator" />
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group col-4">
+                <label>Name:</label>
+                <InputText @bind-Value="model.name" class="form-control form-control-sm" type="text" />
+                <ValidationMessage For="@(() => model.name)" />
+            </div>
+            <div class="form-group col-4">
+                <label>Code</label>
+                <InputText @bind-Value="@model.file_extension" class="form-control form-control-sm" type="text" pla/>
+                <ValidationMessage For="@(() => model.file_extension)" />
+            </div>
+            <div class="form-group col-4">
+                <label>Type</label>
+                <InputSelect @bind-Value="@model.file_type" class="form-control form-control-sm" type="text">
+                    @foreach (var value in Enum.GetValues(typeof(File_Types)))
+                        {
+                            <option>@value</option>
+                        }
+                </InputSelect>
+                <ValidationMessage For="@(() => model.file_type)" />
+            </div>
+        </div>
+        @*<div class="row">
+            <div class="form-group col-8">
+                <label>URL: ex mepage/page1</label>
+                <InputText @bind-Value="model." class="form-control form-control-sm" type="text"/>
+                <ValidationMessage For="@(() => model.url)" />
+            </div>
+            <div class="form-group col-2">
+                <label>Parent:</label>
+                <InputNumber @bind-Value="@model.parent_menu_id" class="form-control form-control-sm" type="number" />
+                <ValidationMessage For="@(() => model.parent_menu_id)" />
+            </div>
+            <div class="form-group col-2">
+                <label>Icon:</label>
+                <InputText @bind-Value="@model.icon" class="form-control form-control-sm" type="text" />
+                <ValidationMessage For="@(() => model.icon)" />
+            </div>
+        </div>*@
+    </div>
+    <div class="modal-footer justify-content-center">
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        @if (has_id)
+        {
+            <button type="button" class="btn btn-secondary" @onclick="@OnCancel">Close</button>
+        }
+        else
+        {
+            <button type="button" class="btn btn-secondary" @onclick="@ResetModel">Clear</button>
+        }
+
+    </div>
+</EditForm>

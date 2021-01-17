@@ -1,0 +1,82 @@
+﻿@using Blazored.Toast.Configuration
+@inject IJSRuntime JSRuntime
+@inject IAuthenServices _AuthenServices
+@inject ILoadingService _Loading
+@inherits LayoutComponentBase
+
+
+@if (isLoggedIn)
+{
+    <AuthorizeView>
+        <Authorized>
+            <HeaderToolbar OnToggleSidebar="ToggleBodyClass" UserInfo="userInfo" />
+            <div id="layoutSidenav">
+                <NavMenu OnToggleSidebar="ToggleBodyClass" isBodyToggleClass="isToggleClass" />
+                <div id="layoutSidenav_content">
+                    <main>
+                        <div class="container-fluid">
+                            <h3 class="mt-3">Static Navigation</h3>
+                            <ol class="breadcrumb mb-4">
+                                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Static Navigation</li>
+                            </ol>
+                            @Body
+                        </div>
+                    </main>
+                    <br/>
+                    <footer class="py-4 bg-light mt-auto border-top">
+                        <div class="container-fluid">
+                            <div class="d-flex align-items-center justify-content-between small">
+                                <div class="text-muted">Copyright &copy; Your Website 2020</div>
+                                <div>
+                                    <a href="#">Privacy Policy</a>
+                                    &middot;
+                                    <a href="#">Terms &amp; Conditions</a>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </Authorized>
+        <Authorizing><LoadingContent/></Authorizing>
+        <NotAuthorized>
+            <Login/>
+        </NotAuthorized>
+    </AuthorizeView>
+}
+else if(!isLoading)
+{
+   <Login/>    
+}
+<LoadingComponent/>
+<BlazoredToasts Position="ToastPosition.BottomRight"
+                ShowProgressBar="true"
+                Timeout="5"
+                IconType="IconType.FontAwesome"
+                SuccessClass="success-toast-override"
+                SuccessIcon="fa fa-check"
+                WarningIcon="fa fa-exclamation-circle"
+                InfoIcon="fa fa-info-circle"
+                ErrorIcon="fa fa-bug" />
+
+@code{
+    private bool isToggleClass { get; set; } = true;
+    private bool isLoading { get; set; } = true;
+    private async Task ToggleBodyClass()
+    {
+        string className = "sb-sidenav-toggled";
+        await JSRuntime.InvokeVoidAsync("Benriya.toggleClass", className);
+        await Task.Delay(200);
+        isToggleClass = await JSRuntime.InvokeAsync<bool>("Benriya.isBodyToggleSidebar", className);
+    }
+    private bool isLoggedIn = false;
+    private Benriya.Share.ViewModels.UserInfoModel userInfo;
+    protected override async Task OnInitializedAsync()
+    {
+        isLoggedIn = await _AuthenServices.checkLoggedIn();
+        if (isLoggedIn)
+            userInfo = await _AuthenServices.GetUser();
+        isLoading = false;
+    }
+}

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Benriya.Share\Benriya.Share.csproj" />
+    <ProjectReference Include="..\..\Inventory\Benriya.Modules.Inventory.Share\Benriya.Modules.Inventory.Share.csproj" />
+  </ItemGroup>
+
+</Project>

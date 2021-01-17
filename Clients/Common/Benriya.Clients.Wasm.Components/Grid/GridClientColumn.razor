@@ -1,0 +1,21 @@
+﻿@using System.Linq
+@using Benriya.Clients.Wasm.Components.Icons
+@inherits Benriya.Clients.Wasm.Components.Grid.GridClientColumnBase
+
+<th class="text-center" style="position:relative;vertical-align:text-top">
+    @ColumnTitle <span style="padding:2px"></span>
+    <div class="col-12 row align-items-center form-group collapse multi-collapse">
+        @if (SearchText && !ColumnTitle.isNOEOW())
+        {
+            <div class="col-auto">
+              <label class="sr-only">search...</label>
+              <div class="input-group mb-1">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><IconFilter/></div>
+                </div>
+                <input type="@InputType" class="form-control form-control-sm" @oninput="OnSearchTextChanged" placeholder="search..." title="Search...">
+              </div>
+            </div>
+        }        
+    </div>
+</th>

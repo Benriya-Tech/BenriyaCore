@@ -1,0 +1,102 @@
+﻿@page "/admin/cms/categoryform/{id}"
+@page "/admin/cms/categoryform"
+@using Benriya.Clients.Wasm.Components.Inputs
+@using Benriya.Utils.Models
+@inherits Benriya.Clients.Modules.CMS.Categories.CategoryFormBase
+
+
+@*@if (isLoading)
+{
+    <LoadingContent />
+}*@
+<EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label>Test</label>
+                <InputText @bind-Value="model.name" class="form-control form-control-sm" type="text" />
+                <ValidationMessage For="@(() => model.name)" />
+            </div>
+            <div class="form-group col-md-6">
+                <label>Test</label>
+                <InputText @bind-Value="@model.description" class="form-control form-control-sm" type="text" />
+                <ValidationMessage For="@(() => model.description)" />
+            </div>
+            <div class="form-group col-12">
+                <label>Test</label>
+                <InputTextArea @bind-Value="@model.description" class="form-control form-control-sm" />
+                <ValidationMessage For="@(() => model.description)" />
+            </div>            
+        </div>
+        <div class="row">
+            <div class="col-12 mt-1 pt-1 pb-1">
+                <div class="border-top-info-5">Select Tags</div>
+            </div>            
+            <div class="col-6 border-right">
+                <InputSearch TItem="DropdownItem" URL="core/Tags/Dropdown" OnSearchData="OnSearchTags" AutoLoad="true" OnLoading="OnLoadingTag"/>
+                <div style="position:relative">
+                @*@if (isLoadingTag)
+                {
+                    <LoadingInContent/>
+                }*@
+
+                @if (SearchTagsData == null || SearchTagsData.Count() == 0)
+                {
+                    <div>No tags found, please enter text to search data</div>
+                }
+                else
+                {
+                    foreach (var tag in SearchTagsData)
+                    {
+                        <div class="mt-1">
+                            <div class="btn-group" role="group" aria-label="Add to category">
+                                @if (tag.is_active)
+                                {
+                                    <button type="button" class="btn btn-sm btn-success" @onclick="(e => AddTags(tag))">+ Add</button>
+                                }
+                                else
+                                {
+                                    <button disabled type="button" class="btn btn-sm btn-success" >+ Add</button>
+                                }
+                              <span class="btn btn-sm btn-light border text-black disabled" data-toggle="tooltip" data-placement="top" title="@tag.description">@tag.label</span>                              
+                            </div>
+                        </div>
+                    }
+                }
+                    </div>
+            </div>
+            <div class="col-6 border-left">
+                @if (model.Tags == null || model.Tags.Count() == 0)
+                {
+                    <div>No tags selected, please add some tags</div>
+                }
+                else
+                {
+                    foreach (var tag in model.Tags)
+                    {
+                        <div class="mt-1">
+                            <div class="btn-group" role="group" aria-label="Add to category">
+                              <button type="button" class="btn btn-sm btn-danger" @onclick="(e=>RemoveTags(tag))">- del</button>
+                              <span class="btn btn-sm btn-light border text-black disabled" data-toggle="tooltip" data-placement="top" title="@tag.description">@tag.name</span>                              
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer justify-content-center">
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        @if (has_id)
+        {
+            <button type="button" class="btn btn-secondary" @onclick="@OnCancel">Close</button>
+        }
+        else
+        {
+            <button type="button" class="btn btn-secondary" @onclick="@ResetModel">Clear</button>
+        }
+
+    </div>
+</EditForm>

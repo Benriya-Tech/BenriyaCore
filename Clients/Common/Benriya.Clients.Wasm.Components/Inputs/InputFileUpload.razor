@@ -1,0 +1,29 @@
+﻿@typeparam TItem
+@inherits Benriya.Clients.Wasm.Components.Inputs.InputFileUploadBase<TItem>
+
+
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text text-success"><i class="fa fa-plus"></i></span>
+  </div>
+<div class="custom-file">
+    <input type="file" class="custom-file-input" @ref="inputFile" @onchange="async () => await ReadFileAsync()" accept="image/x-png,image/gif,image/jpeg"/>
+    <label class="custom-file-label">
+        @if (fileInfo != null) {
+            @fileInfo.Name
+        } else {
+            @("Choose file...")
+        }
+    </label>
+</div>
+    </div>
+@if (isLoading)
+{
+    <div><LoadingInline Message="Uploading..." /></div>
+}
+@if(Message != null)
+{
+    <div class="alert alert-danger" role="alert">
+        Error: @Message
+    </div>
+}

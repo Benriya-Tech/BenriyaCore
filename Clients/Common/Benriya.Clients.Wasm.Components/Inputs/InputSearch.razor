@@ -1,0 +1,9 @@
+﻿@typeparam TItem
+@inherits Benriya.Clients.Wasm.Components.Inputs.InputSearchBase<TItem>
+
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="input-search-addon-x"><i class="fa fa-search"></i></span>
+  </div>
+  <input type="text" class="form-control" placeholder="Search..." aria-label="Username" aria-describedby="input-search-addon-x" @oninput="@(e=>OnSearchTextChanged(e))"/>
+</div>

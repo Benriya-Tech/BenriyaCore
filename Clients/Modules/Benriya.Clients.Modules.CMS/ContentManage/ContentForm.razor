@@ -1,0 +1,178 @@
+﻿@page "/admin/cms/contentform/{id}"
+@page "/admin/cms/contentform"
+
+@using Blazored.Typeahead
+@using Blazored.TextEditor
+@using Benriya.Utils.Models
+@using Benriya.Modules.CMS.Share.Models
+@using Benriya.Clients.Wasm.Components.Inputs
+@using Benriya.Clients.Wasm.Components.Forms
+@inherits Benriya.Clients.Modules.CMS.ContentManage.ContentFormBase
+
+@*@if (isLoading)
+{
+    <LoadingContent />
+}*@
+
+<div class="card">
+    <div class="card-body">
+
+        <EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <FormServValidator @ref="formValidator" />
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label>Title</label>
+                            <InputText @bind-Value="model.name" class="form-control" type="text" />
+                            <ValidationMessage For="@(() => model.name)" />
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <BlazoredTypeahead SearchMethod="SearchCategory" EnableDropDown="true" 
+                                               ShowDropDownOnFocus="true"
+                                               Debounce="200" 
+                                               @bind-Value="model.Category"
+                                               Placeholder="Search category...">
+                                <SelectedTemplate Context="dd">
+                                    @dd.name
+                                </SelectedTemplate>
+                                <ResultTemplate Context="dd">
+                                    @dd.name
+                                </ResultTemplate>
+                                <NotFoundTemplate>
+                                    Sorry, there weren't any search results.
+                                </NotFoundTemplate>
+                            </BlazoredTypeahead>
+                            <ValidationMessage For="@(() => model.Category)" />
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <InputTextArea @bind-Value="model.description" class="form-control form-control-sm" />
+                            <ValidationMessage For="@(() => model.description)" />
+                        </div>
+                        <div class="form-group">
+                            <label>Content</label>
+                            <BlazoredTextEditor @ref="QuillHtml" Placeholder="Compose new content...">
+                                <ToolbarContent>
+                                    <select class="ql-header">
+                                        <option selected=""></option>
+                                        <option value="1"></option>
+                                        <option value="2"></option>
+                                        <option value="3"></option>
+                                        <option value="4"></option>
+                                        <option value="5"></option>
+                                    </select>
+                                    <span class="ql-formats">
+                                        <button class="ql-bold"></button>
+                                        <button class="ql-italic"></button>
+                                        <button class="ql-underline"></button>
+                                        <button class="ql-strike"></button>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <select class="ql-color"></select>
+                                        <select class="ql-background"></select>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-list" value="ordered"></button>
+                                        <button class="ql-list" value="bullet"></button>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-link"></button>
+                                        @*<button type="button" class="btn btn-link" id="custom-button" @onclick="InsertImageClick">*@
+                                        <button type="button" class="btn btn-link" id="custom-button" data-toggle="modal" data-target="#FormInsertImage">
+                                            <span class="fa fa-image"></span>
+                                        </button>
+                                    </span>
+                                </ToolbarContent>
+                                <EditorContent>
+                                    <div style="min-height:100px;">
+                                        @model.body
+                                    </div>
+                                </EditorContent>
+                            </BlazoredTextEditor>
+                            <ValidationMessage For="@(() => model.body)" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                    <div class="row mb-2">
+                        <div class="col-12 mt-1 pt-1 pb-1">
+                            <div class="border-top-info-5">Select Tags</div>
+                        </div>
+                        <div class="col-6 border-right">
+                            <InputSearch TItem="DropdownItem" URL="@($"cms/Category/Tags{((model.Category != null && model.Category.id > 0) ? $"?id={model.Category.id}" : null)}")" OnSearchData="OnSearchTags" AutoLoad="true" OnLoading="OnLoadingTag" />
+                            <div style="position:relative">
+                                @*@if (isLoadingTag)
+                                {
+                                    <LoadingInContent />
+                                }*@
+
+                                @if (SearchTagsData == null || SearchTagsData.Count() == 0)
+                                {
+                                    <div>No tags found, please enter text to search data</div>
+                                }
+                                else
+                                {
+                                    foreach (var tag in SearchTagsData)
+                                    {
+                                        <div class="mt-1">
+                                            <div class="btn-group" role="group" aria-label="Add to category">
+                                                @if (tag.is_active)
+                                                {
+                                                    <button type="button" class="btn btn-sm btn-success" @onclick="(e => AddTags(tag))">+ Add</button>
+                                                }
+                                                else
+                                                {
+                                                    <button disabled type="button" class="btn btn-sm btn-success">+ Add</button>
+                                                }
+                                                <span class="btn btn-sm btn-light border text-black disabled" data-toggle="tooltip" data-placement="top" title="@tag.description">@tag.label</span>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="col-6 border-left">
+                            @if (model.Tags == null || model.Tags.Count() == 0)
+                            {
+                                <div>No tags selected, please add some tags</div>
+                            }
+                            else
+                            {
+                                foreach (var tag in model.Tags)
+                                {
+                                    <div class="mt-1">
+                                        <div class="btn-group" role="group" aria-label="Add to category">
+                                            <button type="button" class="btn btn-sm btn-danger" @onclick="(e=>RemoveTags(tag))">- del</button>
+                                            <span class="btn btn-sm btn-light border text-black disabled" data-toggle="tooltip" data-placement="top" title="@tag.description">@tag.name</span>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                    </div> 
+                    <div class="modal-footer justify-content-center">
+
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        @if (has_id)
+                        {
+                            <button type="button" class="btn btn-secondary" @onclick="@OnCancel">Close</button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-secondary" @onclick="@ResetModel">Clear</button>
+                        }
+
+                    </div>
+                               
+            </div>
+        </EditForm>
+
+    </div>
+</div>
+
+<Benriya.Clients.Wasm.Components.Forms.FormInsertImage InsertImage="InsertImageUpload" />
+

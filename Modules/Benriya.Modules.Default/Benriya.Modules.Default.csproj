@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+	<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\Extensions\</OutputPath>
+    <DocumentationFile>..\..\docs\Benriya.Modules.Default.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+<ItemGroup>
+    <EmbeddedResource Include="Styles\**" />
+	<EmbeddedResource Include="Scripts\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Benriya.Core\Benriya.Core.csproj" />
+  </ItemGroup>
+	<PropertyGroup>
+		<DefaultItemExcludes>$(DefaultItemExcludes);Styles\**</DefaultItemExcludes>
+		<Product>c0b29f8b26597ab41d738358f212241d</Product>
+	</PropertyGroup>
+</Project>

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.11.5" />
+    <PackageReference Include="MongoDB.Driver.Core" Version="2.11.5" />
+    <PackageReference Include="SkiaSharp" Version="2.80.2" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ExtCore\src\ExtCore.Data.EntityFramework\ExtCore.Data.EntityFramework.csproj" />
+    <ProjectReference Include="..\..\ExtCore\src\ExtCore.Data\ExtCore.Data.csproj" />
+    <ProjectReference Include="..\..\ExtCore\src\ExtCore.FileStorage.Abstractions\ExtCore.FileStorage.Abstractions.csproj" />
+    <ProjectReference Include="..\..\ExtCore\src\ExtCore.FileStorage.FileSystem\ExtCore.FileStorage.FileSystem.csproj" />
+    <ProjectReference Include="..\..\ExtCore\src\ExtCore.Mvc.Infrastructure\ExtCore.Mvc.Infrastructure.csproj" />
+    <ProjectReference Include="..\Benriya.Share\Benriya.Share.csproj" />
+  </ItemGroup>
+</Project>

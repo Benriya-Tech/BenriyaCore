@@ -1,0 +1,57 @@
+﻿@page "/admin/mod_frontend"
+
+<h3><i class="fa fa-check text-success"></i> Installed modules</h3>
+
+<table class="table table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Module</th>
+      <th scope="col">Version</th>
+      <th scope="col">Description</th>
+      <th scope="col">Help</th>
+      <th scope="col">Authors</th>
+    </tr>
+  </thead>
+  <tbody>
+      @if (Program.ModulesInstalled.Count() < 1)
+      {
+
+        <tr>
+            <th scope="row" colspan="5"><p class="text-warning"><IconAlert/> No data found</p></th>
+        </tr>
+          
+      }
+      else
+      {
+          foreach(var module in Program.ModulesInstalled)
+          {
+              <tr>
+                  <th scope="row">
+                      @module.Name
+                  </th>
+                  <td>@module.Version</td>
+                  <td>@module.Description</td>
+                  <td>                      
+                     @if(module.Helper != null && module.Helper.Count() > 0)
+                     {
+                         <dl>
+                             @foreach(string txt in module.Helper)
+                             {
+                                 if (Regex.IsMatch(txt[0].ToString(), "[A-Za-z]"))
+                                 {
+                                    <dt>@txt</dt>
+                                 }
+                                 else
+                                 {
+                                     <dd>@txt</dd>
+                                 }
+                             }
+                         </dl>
+                     }
+                  </td>
+                  <td>@module.Authors</td>
+              </tr>
+          }          
+      }    
+  </tbody>
+</table>

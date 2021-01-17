@@ -1,0 +1,101 @@
+﻿@page "/admin/backendmenu"
+@using Benriya.Clients.Wasm.Components.Grid
+@using Benriya.Clients.Wasm.Components.Modals
+@using Benriya.Clients.Wasm.Components.Actions
+@using Benriya.Share.Models.Menus
+@inherits Benriya.Clients.Wasm.Backend.Pages.Menus.BackendMenu_ListBase
+<Title>Menu Management</Title>
+<Meta Property="ogp:title" Content="Menu Management"  />
+<h3>Menu Management</h3>
+<div class="bg-app border-top-info-5">
+    <div class="mr-3 ml-3">
+        <div class="d-none d-md-block"><div class="d-block" style="height:9px;"></div></div>
+        <EditForm Model="@customSearch" OnValidSubmit="@HandleValidSubmitSearch">
+            <DataAnnotationsValidator />
+            <div class="form-row">
+                <div class="form-group col-md-2"></div>
+                <div class="form-group col-md-4">
+                    <label class="mb-0">Test</label>
+                    <InputText @bind-Value="@customSearch.user_name" class="form-control form-control-sm" type="text"/>
+                    <ValidationMessage For="@(() => customSearch.user_name)" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="mb-0">Binding from Test input</label>
+                    <InputText @bind-Value="@customSearch.user_name" class="form-control form-control-sm" type="text"/>
+                    <ValidationMessage For="@(() => customSearch.user_name)" />
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="d-none d-md-block"><span class="d-block" style="height:9px;"></span></label>
+                    <div class="form-control form-control-sm no-bg border-0 text-center text-md-left">                
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+                        <button type="reset" class="btn btn-secondary" @onclick="@HandleReset"><i class="fa fa-times"></i> Clear</button>
+                    </div>                    
+                </div>
+            </div>
+            <div class="d-block d-md-none w-100"><div style="padding:8px; margin-top:8px; border-top:#EEE 3px solid;"></div></div>
+        </EditForm>
+    </div>
+</div>
+<AuthorizeView Roles="Core.Create">
+    <Authorized Context="auth">
+    <div class="bg-app mb-n3">
+    <div class="btn-group ml-3" role="group" aria-label="Button group with nested dropdown" style="z-index:1">
+      <button type="button" class="btn btn-success" @onclick="() => ShowForm()"><i class="fa fa-plus"></i> Add new -  @_lang.AddNew</button>
+      @*<button type="button" class="btn btn-outline-secondary">2</button>*@
+      <div class="btn-group" role="group">
+        <button id="btnGroupActions" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Export
+        </button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupActions">
+          <span class="dropdown-item"  @onclick="@(e => SetLang("th"))">Change lang</span>
+          <a class="dropdown-item" href="#">CSV</a>
+        </div>
+      </div>
+    </div>
+    </div>
+    </Authorized>
+</AuthorizeView>
+<GridView Items="@(new List<SystemMenu>())" OnSearch="@OnSearch" PageSize="5" SearchColumns="@SearchColumns" PageName="@_NavigationManager.Uri" isLoading="true"  Url="core/Menu/List" SearchStyle="GridSearchStyle.HideFirst">  
+    <GridColumns>
+        <GridColumn ColumnTitle="id" Param="id" SearchText="false"/>
+        <GridColumn ColumnTitle="Name" Param="@nameof(SystemMenu_Filter.name)" OnSearchTextChanged="@(e => OnSearchTextChanged(e, nameof(SystemMenu_Filter.name)))"/>
+        <GridColumn ColumnTitle="Code"  Param="@nameof(SystemMenu_Filter.code)" OnSearchTextChanged="@(e => OnSearchTextChanged(e, nameof(SystemMenu_Filter.code)))"/>
+        <GridColumn ColumnTitle="Description" Param="@nameof(SystemMenu_Filter.description)" OnSearchTextChanged="@(e => OnSearchTextChanged(e, nameof(SystemMenu_Filter.description)))"/>
+        <GridColumn ColumnTitle="Parent" InputType="number"  Param="@nameof(SystemMenu_Filter.parent_menu_id)" OnSearchTextChanged="@(e => OnSearchTextChanged(e, nameof(SystemMenu_Filter.parent_menu_id)))"/>
+        <GridColumn/>
+    </GridColumns>
+    <GridRow Context="data">
+        <td>
+            <NavLink href=@string.Format("/authors/authordetail/{0}", data.id)>@data.id</NavLink>
+        </td>
+        <td>@data.name</td>
+        <td>@data.code</td>
+        <td>@data.description</td>
+        <td>@data.parent_menu_id.ToString()</td>
+        <td>
+            <button class="btn btn-sm btn-primary" @onclick="@(e => ShowModal(data))">Show</button>
+            <button class="btn btn-sm btn-primary" @onclick="@(e => ShowForm(data))">Edit</button>
+            <DeleteButton url="core/Menu" id="@data.id.ToString()" isReload="true">
+                <Title><span><b>Remove confirmation</b> <small class="text-secondary">#@data.id</small></span></Title>
+                <Content>
+                    Do you want to remove: <b>@data.name</b>?
+                </Content>
+            </DeleteButton>
+        </td>
+    </GridRow>
+</GridView>
+
+<Modal @ref="modal">
+    <Title>This is a <em>Title!</em></Title>
+    <Body>
+        <div>@ModelData.name</div>
+        <div>@ModelData.code</div>
+    </Body>
+</Modal>
+
+<ModalContent @ref="modalForm" OnClose="OnCloseModal">
+    <Title>This is a <em>Title!</em> - @ModelData.id</Title>
+    <Content>
+        <BackendMenu_Form id="@ModelData.id.ToString()" loaded="loadedFrm" isReload="true" OnActionCompleted="OnActionCompleted" OnCancel="OnCancelForm"/>          
+    </Content>
+</ModalContent>

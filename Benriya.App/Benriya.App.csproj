@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>e071e52c-f8ca-47b3-9445-393d6fff3ce5</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <Product>c0b29f8b26597ab41d738358f212241d</Product>
+    <StartupObject></StartupObject>
+    <Version>1.0.1</Version>
+    <FileVersion>1.0.1.1</FileVersion>
+    <AssemblyVersion>1.0.1.1</AssemblyVersion>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>..\docs\Benriya.App.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.1" NoWarn="NU1605" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.1" NoWarn="NU1605" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="5.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ExtCore\src\ExtCore.Mvc\ExtCore.Mvc.csproj" />
+    <ProjectReference Include="..\..\ExtCore\src\ExtCore.WebApplication\ExtCore.WebApplication.csproj" />
+    <ProjectReference Include="..\Benriya.Core\Benriya.Core.csproj" />
+    <ProjectReference Include="..\Benriya.Data.Context\Benriya.Data.Context.csproj" />
+    <ProjectReference Include="..\Clients\Benriya.Clients.Wasm.Backend\Benriya.Clients.Wasm.Backend.csproj" />
+  </ItemGroup>
+<ItemGroup>
+    <Folder Include="Extensions\" />
+    <Folder Include="FileStorage\Uploads\" />
+  </ItemGroup>
+</Project>

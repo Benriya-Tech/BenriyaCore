@@ -1,0 +1,92 @@
+﻿@page "/admin/tagsgroup"
+@using Benriya.Clients.Wasm.Components.Grid
+@using Benriya.Clients.Wasm.Components.Modals
+@using Benriya.Clients.Wasm.Components.Actions
+@using Benriya.Share.Models.CoreTags
+@inherits Benriya.Clients.Wasm.Backend.Pages.TagsContent.TagsGroupListBase
+
+<h3>Roles Management</h3>
+<div class="bg-app border-top-info-5">
+    <div class="mr-3 ml-3">
+        <div class="d-none d-md-block"><div class="d-block" style="height:9px;"></div></div>
+        <EditForm Model="@customSearch" OnValidSubmit="@HandleValidSubmitSearch">
+            <DataAnnotationsValidator />
+            <div class="form-row">
+                <div class="form-group col-md-2"></div>
+                <div class="form-group col-md-4">
+                    <label class="mb-0">Test</label>
+                    <InputText @bind-Value="@customSearch.user_name" class="form-control form-control-sm" type="text"/>
+                    <ValidationMessage For="@(() => customSearch.user_name)" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="mb-0">Binding from Test input</label>
+                    <InputText @bind-Value="@customSearch.user_name" class="form-control form-control-sm" type="text"/>
+                    <ValidationMessage For="@(() => customSearch.user_name)" />
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="d-none d-md-block"><span class="d-block" style="height:9px;"></span></label>
+                    <div class="form-control form-control-sm no-bg border-0 text-center text-md-left">                
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+                        <button type="reset" class="btn btn-secondary" @onclick="@HandleReset"><i class="fa fa-times"></i> Clear</button>
+                    </div>                    
+                </div>
+            </div>
+            <div class="d-block d-md-none w-100"><div style="padding:8px; margin-top:8px; border-top:#EEE 3px solid;"></div></div>
+        </EditForm>
+    </div>
+</div>
+
+<div class="bg-app mb-n3">
+<div class="btn-group ml-3" role="group" aria-label="Button group with nested dropdown" style="z-index:1">
+  <button type="button" class="btn btn-success" @onclick="() => ShowForm()"><i class="fa fa-plus"></i> Add new</button>
+  @*<button type="button" class="btn btn-outline-secondary">2</button>*@
+  <div class="btn-group" role="group">
+    <button id="btnGroupActions" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Export
+    </button>
+    <div class="dropdown-menu" aria-labelledby="btnGroupActions">
+      <a class="dropdown-item" href="#">Excel</a>
+      <a class="dropdown-item" href="#">CSV</a>
+    </div>
+  </div>
+</div>
+</div>
+<GridView Items="@(new List<Tags_Group>())" OnSearch="@OnSearch" PageSize="5" SearchColumns="@SearchColumns" PageName="@_NavigationManager.Uri" isLoading="true"  Url="core/TagGroup/List" SearchStyle="GridSearchStyle.HideFirst"> 
+    <GridColumns>
+        <GridColumn ColumnTitle="AuthorId xdfsdf rewtertert zxcvzxc" Param="ID" SearchText="false"/>
+        <GridColumn ColumnTitle="FirstName" Param="FirstName" OnSearchTextChanged="@(e => OnSearchTextChanged(e, "FirstName"))"/>
+        <GridColumn ColumnTitle="City" Param="City" OnSearchTextChanged="@(e => OnSearchTextChanged(e, "City"))"/>
+        <GridColumn/>
+    </GridColumns>
+    <GridRow Context="data">
+        <td>
+            <NavLink href=@string.Format("/authors/authordetail/{0}", data.id)>@data.id</NavLink>
+        </td>
+        <td>@data.name</td>
+        <td>@data.description</td>
+        <td>
+            <button class="btn btn-sm btn-primary" @onclick="@(e => ShowModal(data))">Show</button>
+            <button class="btn btn-sm btn-primary" @onclick="@(e => ShowForm(data))">Edit</button>
+            <DeleteButton url="user/roles" id="@data.id.ToString()" isReload="true">
+                <Title><span><b>Remove confirmation</b> <small class="text-secondary">#@data.id</small></span></Title>
+                <Content>
+                    Do you want to remove: <b>@data.name</b>?
+                </Content>
+            </DeleteButton>
+        </td>
+    </GridRow>
+</GridView>
+
+<Modal @ref="modal">
+    <Title>This is a <em>Title!</em></Title>
+    <Body>
+        <div>@ModelData.name</div>
+    </Body>
+</Modal>
+
+<ModalContent @ref="modalForm" OnClose="OnCloseModal">
+    <Title>This is a <em>Title!</em> - @ModelData.id</Title>
+    <Content>
+        <TagsGroupForm id="@ModelData.id.ToString()" loaded="loadedFrm" isReload="true" OnActionCompleted="OnActionCompleted" OnCancel="OnCancelForm"/>          
+    </Content>
+</ModalContent>
